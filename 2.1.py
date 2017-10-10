@@ -7,8 +7,8 @@ def countDifferentElements(array):
             for element in array:
                 if element == current:
                     array.remove(element)
-        else:
-            count+=1
+
+        count+=1
     return count
 
 def buildArray():
@@ -25,3 +25,4 @@ def buildArray():
 buildArray()
 
 
+# to do

@@ -1,4 +1,5 @@
 def A(n,i):
+    print(n,i)
     if n == 0:
         return i+1
     elif i == 0 and n > 0:
