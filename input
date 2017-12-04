@@ -4,3 +4,42 @@ Ivanov paper 7
 Petrov envelope 20
 Ivanov envelope 5
 Petrov pen 15
+
+
+
+from tkinter import *
+
+class CheckOddForm:
+  def __init__(self,master):
+    self.master = master
+    master.title("Check Odd")
+
+    var = IntVar()
+    self.eInputNumber = Entry()
+
+    self.rbIsEven = Radiobutton(master, varieble=var, value=1)
+    self.rbIsOdd = Radiobutton(master, varieble=var, value=2)
+
+    self.eInputNumber.grid(row=0, column=0, columnspan=2, sticky=W+E)
+    self.rbIsEven.grid(row=1, column=0, sticky=W+E)
+    self.rbIsOdd.grid(row=1, column=2, sticky=W+E)
+
+
+root = Tk()
+gui = CheckOddForm(root)
+root.mainloop()
+
+    # def__init__(self, master):
+  #
+  # def isEven(number):
+  #   if number % 2 == 0:
+  #     return True
+  #   else:
+  #     return False
+  #
+
+  #
+  # rbIsEven.pack()
+  # rbIsOdd.pack()
+  # eInputNumber.pack()
+  # root.mainloop()
