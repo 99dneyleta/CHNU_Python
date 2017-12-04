@@ -28,7 +28,7 @@ class CheckOddForm:
     self.activeRb = "Even"
     self.eInputNumber = Entry(master)
 
-    self.rbIsEven = Radiobutton(master, text="Is Even", command=self.command(), value="Even", variable=self.activeRb)
+    self.rbIsEven = Radiobutton(master, text="Is Even", command=self.command, value="Even", variable=self.activeRb)
     self.rbIsOdd = Radiobutton(master, text="Is Odd?", value="Odd", variable=self.activeRb)
 
     self.rbIsEven.pack()
