@@ -3,12 +3,12 @@
 # Для заданого факультету обчисліть кількість абітурієнтів, що поступають, а також знайдіть абітурієнта із найнижчим балом.
 # В завданні 1 використайте “Об'єктно-орієнтовані бази даних (ZODB)”.
 
-from ZODB import FileStorage, DB
+import ZODB
 from Entrant import Entrant
 from datetime import datetime
 import transaction
 
-storage = FileStorage.FileStorage('mydata.fs')
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
 db = DB(storage)
 connection = db.open()
 root = connection.root

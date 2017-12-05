@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 
 def isEven(number):
@@ -7,29 +8,37 @@ def isEven(number):
   else:
     return False
 
+
 class CheckOddForm:
+
+  def say(self, phrase):
+    messagebox.showinfo("Msg", phrase)
+
   def command(self):
     try:
       value = float(self.eInputNumber.get())
-      if self.activeRb == "Even":
-        print(isEven(value))
+      if self.activeRb.get() == "Even":
+        self.say(str(isEven(value)))
       else:
-        print(not isEven(value))
+        self.say(str(not isEven(value)))
     except ValueError as e:
       print(e)
 
     return False
+
+
+
 
   def __init__(self, master):
 
     self.master = master
     master.title("Check Number")
 
-    self.activeRb = "Even"
+    self.activeRb = StringVar()
     self.eInputNumber = Entry(master)
 
     self.rbIsEven = Radiobutton(master, text="Is Even", command=self.command, value="Even", variable=self.activeRb)
-    self.rbIsOdd = Radiobutton(master, text="Is Odd?", value="Odd", variable=self.activeRb)
+    self.rbIsOdd = Radiobutton(master, text="Is Odd?", command=self.command, value="Odd", variable=self.activeRb)
 
     self.rbIsEven.pack()
     self.rbIsOdd.pack()
