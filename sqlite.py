@@ -3,25 +3,31 @@ import sqlite3
 class Sqlite:
     def __init__(self, dbName):
         self.dbName = dbName
-        self.tablesNameList = []
         self.Connection = sqlite3.connect(dbName)
         self.Cursor = self.Connection.cursor()
 
-    def closeDB(self):
+    def close(self):
         self.Connection.close()
     # rows must be dictionary with type and value
     def createTable(self, tableName, rows):
         values = ''
-        for row in rows:
-            values += row.type + ' ' + row.value + ', '
-        self.Cursor.execute('''CREATE TABLE''' + str(tableName) + values)
-        self.tablesNameList.append(tableName)
+        for name, value in rows.items():
+            values += name + ' ' + value + ', '
+        values = values[0:-2]
+        self.Cursor.execute('''CREATE TABLE ''' + str(tableName) + '''(''' + values + ''')''')
+        self.commit()
 
-    def insertIntoTable(self, tableName, values, lineParametrsCount):
-         # if this table Name was created
-         parametrs = '?,'*lineParametrsCount
-         if(self.tablesNameList.Consist(tableName, values)):
-             self.Cursor.executemany('INSERT INTO' + tableName + 'VALUES ()' + parametrs, values)
+    def insertIntoTable(self, tableName, data=None):
+        parametrs = '?,' * data[0].__len__()
+        parametrs = parametrs[0:-1]
+        self.Cursor.executemany('INSERT INTO ' + tableName +' VALUES ' + '(' +parametrs + ')', data)
+        self.commit()
+
+    def select(self, query,  data):
+        self.Cursor.execute(query, (data,))
+
+
+
 
     def commit(self):
         self.Connection.commit()
