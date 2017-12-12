@@ -1,24 +1,21 @@
 import sqlite
 
-tableName = 'Entrant'
-faculty = 'Math'
-allEntrantFromFacultyQuery = 'SELECT * FROM ' + tableName + ' WHERE faculty=(?)'
-studentWithTheLowestMark = 'SELECT * FROM ' + tableName + ' WHERE avg_mark = (SELECT min(avg_mark) FROM ' + tableName + ')'
+tableName = 'Book'
+countOfUnique = 'SELECT COUNT(DISTINCT second_name_author) FROM ' + tableName
+= 'SELECT name FROM ' + tableName + ' ORDER BY year_of_publication ASC LIMIT 1 '
 
-entrantTable = {'name': 'str', 'birthday': 'str', 'school': 'str', 'faculty': 'str', 'specialty': 'str', 'avg_mark': 'float'}
-data = [('Petro', '12-2-1996', '121', 'Math', 'Programmer', 5),
-        ('Petro', '12-12-1996', '13', 'Applied Math', 'Programmer', 3),
-        ('Petro', '12-7-1996', '45', 'Applied Math', 'testing', 2),
-       ]
+entrantTable = {'id': 'integer', 'first_name_author': 'str', 'second_name_author': 'str', 'name': 'str', 'number_of_page': 'str', 'year_of_publication': 'int', 'name_of_publishing_house':'str', 'date_of_arrival':'str'}
+data = [('1', 'Roma', 'chubk', 'Math', 5, 1900, 'BLA', '11/12/2000'),
+        ('2', 'Roma', 'NEchubk', 'NEMath', 5, 1901, 'BLA', '11/12/2000')]
 
-DB = sqlite.Sqlite('DB.sqlite3')
-#DB.createTable(tableName, entrantTable)
-#DB.insertIntoTable('Entrant', data)
+DB = sqlite.Sqlite('DB.sqlite31')
+# DB.createTable(tableName, entrantTable)
+#DB.insertIntoTable('Book', data)
 
-DB.select(allEntrantFromFacultyQuery,faculty)
-print(DB.Cursor.fetchall().__len__())
+DB.select(allEntrantFromFacultyQuery)
+print(DB.Cursor.fetchone()[0])
 
 DB.Cursor.execute(studentWithTheLowestMark)
-print(DB.Cursor.fetchone())
+print(DB.Cursor.fetchone()[0])
 
 DB.close()

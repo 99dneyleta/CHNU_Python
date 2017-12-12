@@ -23,8 +23,8 @@ class Sqlite:
         self.Cursor.executemany('INSERT INTO ' + tableName +' VALUES ' + '(' +parametrs + ')', data)
         self.commit()
 
-    def select(self, query,  data):
-        self.Cursor.execute(query, (data,))
+    def select(self, query):
+        self.Cursor.execute(query)
 
 
 
